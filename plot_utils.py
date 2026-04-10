@@ -7,10 +7,12 @@ import matplotlib.pyplot as plt
 import base64
 import os
 from io import BytesIO
+import mne
 
 
 def setup_matplotlib_backend():
     """Set up matplotlib backend for headless execution."""
+    mne.viz.set_browser_backend('matplotlib')
     matplotlib.use('Agg')
 
 
