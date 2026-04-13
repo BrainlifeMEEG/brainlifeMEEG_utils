@@ -11,9 +11,16 @@ import mne
 
 
 def setup_matplotlib_backend():
-    """Set up matplotlib backend for headless execution."""
-    mne.viz.set_browser_backend('matplotlib')
-    matplotlib.use('Agg')
+    """Set up matplotlib backend."""
+    # if running in headless environment, use 'Agg' backend
+    if os.environ.get('DISPLAY', '') == '':
+        mne.viz.set_browser_backend('matplotlib')
+        matplotlib.use('Agg')
+    else:
+        mne.viz.set_browser_backend('qt')
+        matplotlib.use('Qt5Agg')
+
+
 
 
 def save_plot_to_base64(fig, close_fig=True, dpi=100):
